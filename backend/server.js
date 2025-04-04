@@ -27,6 +27,7 @@ mongoose.connect(uri, {
 
 let db, shufflesCollection;
 
+/*
 client.connect()
   .then(() => {
     const db = client.db('shufflesDB');
@@ -35,9 +36,9 @@ client.connect()
     // Start your app or define routes here
   })
   .catch(err => console.error('MongoDB connection error:', err));
+*/
 
 
-/*
 MongoClient.connect(uri)
   .then(client => {
     db = client.db('shufflesDB');
@@ -45,7 +46,7 @@ MongoClient.connect(uri)
     console.log('Connected to MongoDB');
   })
   .catch(err => console.error('MongoDB connection error:', err));
-*/
+
 
 app.get('/api/shuffles', async (req, res) => {
     try {
