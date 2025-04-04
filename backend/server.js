@@ -48,25 +48,28 @@ MongoClient.connect(uri)
   .catch(err => console.error('MongoDB connection error:', err));
 
 
-app.get('/api/shuffles', async (req, res) => {
-    try {
-        const allShuffles = await shufflesCollection.find().toArray();
-        res.json(allShuffles.map(entry => entry.shuffle));
-    } catch (error) {
-        res.status(500).json({ error: 'Failed to fetch shuffle history' })
-    }
-        //res.json(loadShuffles());
-});
-
 app.post('/api/shuffles', async (req, res) => {
-    const newShuffle = req.body.shuffleData;
     try {
-        await shufflesCollection.insertOne({ shuffleData: newShuffle, timestamp: new Date() });
+        const newShuffle = req.body.shuffleData;
+        await shufflesCollection.insertOne({ shuffle: newShuffle, createdAt: new Date() });
         const allShuffles = await shufflesCollection.find().toArray();
-        res.json({ history: allShuffles.map(entry => entry.shuffleData ) });
+        res.json({ history: allShuffles.map(s => s.shuffle ) });
     } catch (error) {
-        res.status(500).json({ error: 'Failed to save shuffle' })
+        console.error(error);
+        res.status(500).send('Failed to save shuffle')
     }
+
+
+app.get('/api/shuffles', async (req, res) => {
+        try {
+            const allShuffles = await shufflesCollection.find().toArray();
+            res.json(allShuffles.map(s => s.shuffle));
+        } catch (error) {
+            console.error(error);
+            res.status(500).send('Failed to fetch shuffle history')
+        }
+            //res.json(loadShuffles());
+    });
 /*
     let shuffles = loadShuffles();
     shuffles.push(newShuffle);
