@@ -33,7 +33,7 @@ export default function ShufflePage() {
     
     const handleShuffle = () => {
         const newShuffle = shuffleDeck(deck);
-        setDeck(newShuffle);  // This updates the deck state
+        //setDeck(newShuffle);  // This updates the deck state
         setShuffledDeck(newShuffle);
         
         
