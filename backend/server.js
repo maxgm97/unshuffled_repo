@@ -1,6 +1,6 @@
 const express = require('express');
 const { MongoClient } = require('mongodb');
-const uri = "mongodb+srv://maxgmiller87:p7n2qVp7Ow0mlkeQ@cluster0.hl2zuwx.mongodb.net/shufflesDB?retryWrites=true&w=majority&appName=Cluster0";
+// const uri = "mongodb+srv://maxgmiller87:p7n2qVp7Ow0mlkeQ@cluster0.hl2zuwx.mongodb.net/shufflesDB?retryWrites=true&w=majority&appName=Cluster0";
 const cors = require('cors');
 const fs = require('fs');
 require('dotenv').config();
@@ -13,7 +13,8 @@ app.use(express.json());
 
 const PORT = process.env.PORT || 3000;
 
-// const uri = process.env.MONGO_URI; // store connection string in .env
+const uri = process.env.MONGO_URI; // store connection string in .env
+const client = new MongoClient(uri)
 // const uri = 'mongodb+srv://maxgmiller87:p7n2qVp7Ow0mlkeQ@cluster0.mongodb.net/shufflesDB?retryWrites=true&w=majority'
 
 /*
@@ -27,6 +28,17 @@ mongoose.connect(uri, {
 
 let db, shufflesCollection;
 
+client.connect()
+  .then(() => {
+    const db = client.db('shufflesDB');
+    const collection = db.collection('shuffles');
+    console.log('Connected to MongoDB from backend!');
+    // Start your app or define routes here
+  })
+  .catch(err => console.error('MongoDB connection error:', err));
+
+
+/*
 MongoClient.connect(uri)
   .then(client => {
     db = client.db('shufflesDB');
@@ -34,7 +46,7 @@ MongoClient.connect(uri)
     console.log('Connected to MongoDB');
   })
   .catch(err => console.error('MongoDB connection error:', err));
-
+*/
 
 app.get('/api/shuffles', async (req, res) => {
     try {
