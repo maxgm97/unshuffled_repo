@@ -15,7 +15,6 @@ const PORT = process.env.PORT || 3000;
 
 const uri = process.env.MONGO_URI; // store connection string in .env
 const client = new MongoClient(uri)
-// const uri = 'mongodb+srv://maxgmiller87:p7n2qVp7Ow0mlkeQ@cluster0.mongodb.net/shufflesDB?retryWrites=true&w=majority'
 
 /*
 mongoose.connect(uri, {
