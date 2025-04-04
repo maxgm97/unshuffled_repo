@@ -1,5 +1,6 @@
 const express = require('express');
 const { MongoClient } = require('mongodb');
+const uri = "mongodb+srv://maxgmiller87:p7n2qVp7Ow0mlkeQ@cluster0.hl2zuwx.mongodb.net/?appName=Cluster0";
 const cors = require('cors');
 const fs = require('fs');
 require('dotenv').config();
@@ -13,7 +14,7 @@ app.use(express.json());
 const PORT = process.env.PORT || 3000;
 
 // const uri = process.env.MONGO_URI; // store connection string in .env
-const uri = 'mongodb+srv://maxgmiller87:p7n2qVp7Ow0mlkeQ@cluster0.mongodb.net/shufflesDB?retryWrites=true&w=majority'
+// const uri = 'mongodb+srv://maxgmiller87:p7n2qVp7Ow0mlkeQ@cluster0.mongodb.net/shufflesDB?retryWrites=true&w=majority'
 
 /*
 mongoose.connect(uri, {
@@ -26,7 +27,7 @@ mongoose.connect(uri, {
 
 let db, shufflesCollection;
 
-MongoClient.connect(uri, { useNewUrlParser: true, useUnifiedTopology: true})
+MongoClient.connect(uri)
   .then(client => {
     db = client.db('shufflesDB');
     shufflesCollection = db.collection('shuffles');
