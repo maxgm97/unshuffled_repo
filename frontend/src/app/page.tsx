@@ -82,7 +82,7 @@ export default function ShufflePage() {
           Clubs: 'C',
           Spades: 'S',
         };
-        return `/cards/${rank}${suitInitials[suit]}.png`;
+        return `/images/${rank}${suitInitials[suit]}.png`;
       };
     
 
