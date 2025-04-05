@@ -102,7 +102,7 @@ export default function ShufflePage() {
                         className="card"
                         //alt={card}
                         //style={{ width: '70px', height: 'auto', margin: '5px' }}
-                        style={{ backgroundImage: `url(/cards/${card}.png)`}}>
+                        style={{ backgroundImage: cardNameToFilename(card)}}>
                         <span className="card-text">{card}</span>
                     </div>
                 ))}
