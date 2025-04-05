@@ -5,6 +5,12 @@ body {
     background-size: cover; /* Ensures the image covers the whole page */
     background-position: center; /* Centers the image */
     background-attachment: fixed; /* Keeps the image fixed as you scroll */
+
+    background-repeat: no-repeat;
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow-x: hidden;
 }
 
 .title {
