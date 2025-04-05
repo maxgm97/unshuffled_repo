@@ -1,7 +1,7 @@
 'use client'
 
 import { useState } from 'react';
-//import axios from 'axios';
+import axios from 'axios';
 
 const suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades'];
 const ranks = ['2', '3', '4', '5', '6', '7', '8', '9', '10', 'J', 'Q', 'K', 'A'];
@@ -24,11 +24,18 @@ export default function ShufflePage() {
     //const [deck, setDeck] = useState<string[]>(generateDeck());
     const [deck] = useState<string[]>(generateDeck());
     const [shuffledDeck, setShuffledDeck] = useState<string[]>([]);
+    //const [history, setHistory] = useState<string[]>([]);
     
     const handleShuffle = () => {
         const newShuffle = shuffleDeck(deck);
         //setDeck(newShuffle);  // This updates the deck state
         setShuffledDeck(newShuffle);
+        
+        
+        axios.post('https://api.unshuffled.net/api/shuffles', { shuffleData: newShuffle })
+            //.then(response => setHistory(response.data.history))
+            //.catch(error => console.error('Error saving shuffle:', error))
+            ;
     };
 
     return (
