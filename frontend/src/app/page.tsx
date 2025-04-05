@@ -26,6 +26,8 @@ export default function ShufflePage() {
     const [shuffledDeck, setShuffledDeck] = useState<string[]>([]);
     //const [history, setHistory] = useState<string[]>([]);
     const [shuffleCount, setShuffleCount] = useState<number | null>(null);
+    const [email, setEmail] = useState<string>('');
+    const [isEmailEntered, setIsEmailEntered] = useState<boolean>(false);
     
     const fetchShuffleCount = async () => {
         try {
@@ -60,13 +62,17 @@ export default function ShufflePage() {
         //setDeck(newShuffle);  // This updates the deck state
         setShuffledDeck(newShuffle);
 
-        try {
-            await axios.post('https://api.unshuffled.net/api/shuffles', { shuffle: newShuffle });
-            fetchShuffleCount(); // update count after posting
-          } catch (error) {
-            console.error('Error saving shuffle:', error);
-          }
-        };
+        if (isEmailEntered) {
+            try {
+                await axios.post('https://api.unshuffled.net/api/shuffles', { shuffle: newShuffle, email });
+                fetchShuffleCount(); // update count after posting
+            } catch (error) {
+                console.error('Error saving shuffle:', error);
+            }
+        } else {
+            alert("Please enter your email to shuffle the deck. We'll only use it to contact you in case of a duplicate shuffle.")
+        }
+    };
         /*
         axios.post('https://api.unshuffled.net/api/shuffles', { shuffleData: newShuffle })
             //.then(response => setHistory(response.data.history))
@@ -74,6 +80,19 @@ export default function ShufflePage() {
             ;
         */
 
+    const handleEmailChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setEmail(e.target.value);
+    };
+    
+    const handleEmailSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
+        if (email) {
+            setIsEmailEntered(true);
+        } else {
+        alert('Please enter a valid email, used to contact you in case of a duplicate shuffle');
+        }
+    };
+    
     // card images
     const cardNameToFilename = (card: string): string => {
         const [rank, , suit] = card.split(' ');
@@ -89,21 +108,44 @@ export default function ShufflePage() {
 
     return (
         <div style={{ textAlign: 'center', padding: '20px' }}>
-            <h1 className="title">Virtual Card Shuffle</h1>
-            <p className="count">Total shuffles saved: {shuffleCount !== null ? shuffleCount : 'Loading...'}</p>
-            <button onClick={handleShuffle} className="shuffle-button">
-                Shuffle Deck
-            </button>
-            <div style={{ marginTop: '20px', display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
-                {shuffledDeck.map((card, index) => (
-                    <img
-                    key={index}
-                    src={cardNameToFilename(card)}
-                    alt={card}
-                    style={{ width: '75px', height: 'auto', margin: '5px' }}
+          <h1 className="title">Virtual Card Shuffle</h1>
+          <p className="count">Total shuffles saved: {shuffleCount !== null ? shuffleCount : 'Loading...'}</p>
+          
+          {!isEmailEntered && (
+            <div className="email-prompt">
+              <h2>Enter your email to shuffle</h2>
+              <form onSubmit={handleEmailSubmit}>
+                <input
+                  type="email"
+                  value={email}
+                  onChange={handleEmailChange}
+                  placeholder="Enter your email"
+                  required
+                  style={{ padding: '10px', margin: '10px', fontSize: '16px' }}
                 />
-            ))}
+                <button type="submit" className="submit-email-btn" style={{ padding: '10px', fontSize: '16px' }}>
+                  Submit
+                </button>
+              </form>
             </div>
+          )}
+    
+          {isEmailEntered && (
+            <button onClick={handleShuffle} className="shuffle-button">
+              Shuffle Deck
+            </button>
+          )}
+    
+          <div style={{ marginTop: '20px', display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
+            {shuffledDeck.map((card, index) => (
+              <img
+                key={index}
+                src={cardNameToFilename(card)}
+                alt={card}
+                style={{ width: '75px', height: 'auto', margin: '5px' }}
+              />
+            ))}
+          </div>
         </div>
-    );
+      );;
 }
