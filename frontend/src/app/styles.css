@@ -1,5 +1,5 @@
 /* styles.css */
-
+ 
 body {
     background-image: url('/images/poker_felt.jpg');
     background-size: cover; /* Ensures the image covers the whole page */
@@ -7,27 +7,19 @@ body {
     background-attachment: fixed; /* Keeps the image fixed as you scroll */
 }
 
-@font-face {
-    font-family: 'Roboto';
-    src: local('Roboto-Regular'), url("/fonts/Roboto-Regular.ttf"), format('truetype');
-}
-
 .title {
-    font-family: 'Roboto';
     font-weight: bold;
     font-size: 36px;
-    color: #FFFFFF;
+    color: #00FFFF;
 }
 
 .count {
-    font-family: 'Roboto';
     font-weight: bold;
     font-size: 24px;
-    color: #FFFFFF;
+    color: #00FFFF;
 }
 
 .shuffle-button {
-    Font-family: 'Roboto';
     background-color: #4CAF50;
     color: white;
     padding: 15px 32px;
