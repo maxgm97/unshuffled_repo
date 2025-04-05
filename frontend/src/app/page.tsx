@@ -28,8 +28,12 @@ export default function ShufflePage() {
     
     useEffect(() => {
         axios.get('https://api.unshuffled.net/api/shuffles/count')
-          .then(response => setShuffleCount(response.data.count))
-          .catch(error => console.error('Error fetching shuffle count:', error));
+          .then(response => {
+            setShuffleCount(response.data.count);
+          })
+          .catch(error => {
+            console.error('Error fetching shuffle count:', error);
+          });
       }, []);
 
     const handleShuffle = () => {
