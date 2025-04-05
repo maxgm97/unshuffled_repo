@@ -6,12 +6,12 @@ body {
     background-position: center; /* Centers the image */
     background-attachment: fixed; /* Keeps the image fixed as you scroll */
 }
-/*
+
 @font-face {
     font-family: 'Roboto';
-    src: local('Roboto'), url(./fonts/Roboto-Regular.ttf), format('truetype');
+    src: local('Roboto-Regular'), url("./fonts/Roboto-Regular.ttf"), format('truetype');
 }
-*/
+
 .title {
     font-family: 'Roboto';
     font-weight: bold;
