@@ -112,7 +112,7 @@ export default function ShufflePage() {
           
           {!isEmailEntered && (
             <div className="email-prompt">
-              <h2>Enter your email to shuffle</h2>
+              <h2>Enter your username to shuffle</h2>
               <form onSubmit={handleEmailSubmit}>
                 <input
                   type="text"
