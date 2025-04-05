@@ -51,7 +51,7 @@ app.post('/api/shuffles', async (req, res) => {
     try {
         const { newShuffle, email } = req.body;
         if (!email) {
-            return res.status(400).json({ error: 'Email is required in case of duplicate shuffle'});
+            return res.status(400).json({ error: 'Username is required in case of duplicate shuffle'});
         }
         await shufflesCollection.insertOne({ 
             shuffle: newShuffle, 

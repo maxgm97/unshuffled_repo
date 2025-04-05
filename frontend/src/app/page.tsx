@@ -70,7 +70,7 @@ export default function ShufflePage() {
                 console.error('Error saving shuffle:', error);
             }
         } else {
-            alert("Please enter your email to shuffle the deck. We'll only use it to contact you in case of a duplicate shuffle.")
+            alert("Please enter your username to shuffle the deck.")
         }
     };
         /*
@@ -89,7 +89,7 @@ export default function ShufflePage() {
         if (email) {
             setIsEmailEntered(true);
         } else {
-        alert('Please enter a valid email, used to contact you in case of a duplicate shuffle');
+        alert('Please enter a username');
         }
     };
     
@@ -105,7 +105,6 @@ export default function ShufflePage() {
         return `/images/${rank}${suitInitials[suit]}.png`;
       };
     
-
     return (
         <div style={{ textAlign: 'center', padding: '20px' }}>
           <h1 className="title">Virtual Card Shuffle</h1>
@@ -116,10 +115,10 @@ export default function ShufflePage() {
               <h2>Enter your email to shuffle</h2>
               <form onSubmit={handleEmailSubmit}>
                 <input
-                  type="email"
+                  type="text"
                   value={email}
                   onChange={handleEmailChange}
-                  placeholder="Enter your email"
+                  placeholder="Enter your username: "
                   required
                   style={{ padding: '10px', margin: '10px', fontSize: '16px' }}
                 />
