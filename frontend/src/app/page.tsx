@@ -96,16 +96,13 @@ export default function ShufflePage() {
             </button>
             <div style={{ marginTop: '20px', display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
                 {shuffledDeck.map((card, index) => (
-                    <div
-                        key={index}
-                        //src={cardNameToFilename(card)}
-                        className="card"
-                        //alt={card}
-                        //style={{ width: '70px', height: 'auto', margin: '5px' }}
-                        style={{ backgroundImage: cardNameToFilename(card)}}>
-                        <span className="card-text">{card}</span>
-                    </div>
-                ))}
+                    <img
+                    key={index}
+                    src={cardNameToFilename(card)}
+                    alt={card}
+                    style={{ width: '70px', height: 'auto', margin: '5px' }}
+                />
+            ))}
             </div>
         </div>
     );
