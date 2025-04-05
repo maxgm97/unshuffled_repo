@@ -59,7 +59,7 @@ app.post('/api/shuffles', async (req, res) => {
         res.status(500).send('Failed to save shuffle')
     }
 
-
+/* // getting shuffle history?
 app.get('/api/shuffles', async (req, res) => {
         try {
             const allShuffles = await shufflesCollection.find().toArray();
@@ -70,6 +70,20 @@ app.get('/api/shuffles', async (req, res) => {
         }
             //res.json(loadShuffles());
     });
+*/
+
+// getting shuffle count
+app.get('/api/shuffles/count', async (req, res) => {
+    try {
+      const count = await shufflesCollection.countDocuments();
+      res.json({ count });
+    } catch (error) {
+      console.error('Error counting documents:', error);
+      res.status(500).json({ error: 'Failed to count documents' });
+    }
+  });
+  
+
 /*
     let shuffles = loadShuffles();
     shuffles.push(newShuffle);
