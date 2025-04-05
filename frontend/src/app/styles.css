@@ -9,7 +9,7 @@ body {
 
 @font-face {
     font-family: 'Roboto';
-    src: local('Roboto-Regular'), url("./fonts/Roboto-Regular.ttf"), format('truetype');
+    src: local('Roboto-Regular'), url("/fonts/Roboto-Regular.ttf"), format('truetype');
 }
 
 .title {
