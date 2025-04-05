@@ -26,6 +26,17 @@ export default function ShufflePage() {
     //const [history, setHistory] = useState<string[]>([]);
     const [shuffleCount, setShuffleCount] = useState<number | null>(null);
     
+    const fetchShuffleCount = async () => {
+        try {
+          const response = await axios.get('https://api.unshuffled.net/api/shuffles/count');
+          setShuffleCount(response.data.count);
+        } catch (error) {
+          console.error('Error fetching shuffle count:', error);
+        }
+      };
+
+    //old useeffect code?
+    /*
     useEffect(() => {
         axios.get('https://api.unshuffled.net/api/shuffles/count')
           .then(response => {
@@ -35,18 +46,32 @@ export default function ShufflePage() {
             console.error('Error fetching shuffle count:', error);
           });
       }, []);
+    */
 
-    const handleShuffle = () => {
+    useEffect(() => {
+        fetchShuffleCount();
+    }, []);
+    
+
+    const handleShuffle = async () => {
+        const deck = generateDeck()
         const newShuffle = shuffleDeck(deck);
         //setDeck(newShuffle);  // This updates the deck state
         setShuffledDeck(newShuffle);
-        
-        
+
+        try {
+            await axios.post('https://api.unshuffled.net/api/shuffles', { shuffle: newShuffle });
+            fetchShuffleCount(); // update count after posting
+          } catch (error) {
+            console.error('Error saving shuffle:', error);
+          }
+        };
+        /*
         axios.post('https://api.unshuffled.net/api/shuffles', { shuffleData: newShuffle })
             //.then(response => setHistory(response.data.history))
             //.catch(error => console.error('Error saving shuffle:', error))
             ;
-    };
+        */
 
     return (
         <div style={{ textAlign: 'center', padding: '20px' }}>
