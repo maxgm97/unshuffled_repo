@@ -17,6 +17,7 @@
     "dotenv": "^16.4.7",
     "express": "^5.1.0",
     "fs": "^0.0.1-security",
+    "head": "^1.0.0",
     "mongodb": "^6.15.0",
     "mongoose": "^8.13.2",
     "mongosh": "^2.4.2",
