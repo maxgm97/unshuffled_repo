@@ -1,6 +1,5 @@
 const express = require('express');
 const { MongoClient } = require('mongodb');
-// const uri = "mongodb+srv://maxgmiller87:p7n2qVp7Ow0mlkeQ@cluster0.hl2zuwx.mongodb.net/shufflesDB?retryWrites=true&w=majority&appName=Cluster0";
 const cors = require('cors');
 const fs = require('fs');
 require('dotenv').config();
