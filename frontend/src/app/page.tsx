@@ -100,7 +100,7 @@ export default function ShufflePage() {
                     key={index}
                     src={cardNameToFilename(card)}
                     alt={card}
-                    style={{ width: '78px', height: 'auto', margin: '5px' }}
+                    style={{ width: '75px', height: 'auto', margin: '5px' }}
                 />
             ))}
             </div>
