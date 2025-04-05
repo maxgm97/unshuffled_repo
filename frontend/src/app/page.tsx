@@ -73,14 +73,32 @@ export default function ShufflePage() {
             ;
         */
 
+    // card images
+    const cardNameToFilename = (card: string): string => {
+        const [rank, , suit] = card.split(' ');
+        const suitInitials: Record<string, string> = {
+          Hearts: 'H',
+          Diamonds: 'D',
+          Clubs: 'C',
+          Spades: 'S',
+        };
+        return `/cards/${rank}${suitInitials[suit]}.png`;
+      };
+    
+
     return (
         <div style={{ textAlign: 'center', padding: '20px' }}>
             <h1>Virtual Card Shuffle</h1>
             <p>Total shuffles saved: {shuffleCount !== null ? shuffleCount : 'Loading...'}</p>
             <button onClick={handleShuffle}>Shuffle Deck</button>
-            <div style={{ marginTop: '20px' }}>
+            <div style={{ marginTop: '20px', display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
                 {shuffledDeck.map((card, index) => (
-                    <div key={index}>{card}</div>
+                    <img
+                        key={index}
+                        src={cardNameToFilename(card)}
+                        alt={card}
+                        style={{ width: '80px', height: 'auto', margin: '5px' }}
+                    />
                 ))}
             </div>
         </div>
