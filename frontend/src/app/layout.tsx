@@ -28,6 +28,13 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="icon" href="/images/favicon.ico" type="image/x-icon"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="description" content="A site to shuffle every shuffle" />
+        <meta property="og:title" content="Unshuffled" />
+        <meta property="og:description" content="A site to shuffle every shuffle" />
+        <meta property="og:image" content="/images/Unshuffled_Preview.png" />
+        <meta property="og:url" content="https://unshuffled.net" />
+        <meta property="og:type" content="website" />
         <title>Shuffle please</title>
       </head>
       <body
