@@ -91,9 +91,6 @@ export default function ShufflePage() {
 
     return (
         <div style={{ textAlign: 'center', padding: '20px' }}>
-            <Head>
-                <link href='https://fonts.googleapis.com/css2?family=Montserrat:wght@700&display=swap" rel="stylesheet' />
-            </Head>
             <h1 className="title">Virtual Card Shuffle</h1>
             <p className="count">Total shuffles saved: {shuffleCount !== null ? shuffleCount : 'Loading...'}</p>
             <button onClick={handleShuffle} className="shuffle-button">
