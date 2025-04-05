@@ -1,0 +1,16 @@
+/* styles.css */
+.shuffle-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px 32px;
+    font-size: 16px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.shuffle-button:hover {
+    background-color: #45a049;
+}

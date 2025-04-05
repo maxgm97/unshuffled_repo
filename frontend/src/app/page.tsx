@@ -90,7 +90,9 @@ export default function ShufflePage() {
         <div style={{ textAlign: 'center', padding: '20px' }}>
             <h1>Virtual Card Shuffle</h1>
             <p>Total shuffles saved: {shuffleCount !== null ? shuffleCount : 'Loading...'}</p>
-            <button onClick={handleShuffle}>Shuffle Deck</button>
+            <button onClick={handleShuffle} className="shuffle-button">
+                Shuffle Deck
+            </button>
             <div style={{ marginTop: '20px', display: 'flex', flexWrap: 'wrap', justifyContent: 'center' }}>
                 {shuffledDeck.map((card, index) => (
                     <img
