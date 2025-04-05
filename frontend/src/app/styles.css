@@ -10,11 +10,13 @@ body {
 .title {
     font-weight: bold;
     font-size: 36px;
+    color: #00FFFF;
 }
 
 .count {
     font-weight: bold;
     font-size: 24px;
+    color: #00FFFF;
 }
 
 .shuffle-button {
