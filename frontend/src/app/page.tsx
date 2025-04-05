@@ -109,7 +109,7 @@ export default function ShufflePage() {
         <div style={{ textAlign: 'center', padding: '20px' }}>
           <h1 className="title">Virtual Card Shuffle</h1>
           <p className="count">Total shuffles saved: {shuffleCount !== null ? shuffleCount : 'Loading...'}</p>
-          
+          <p className="count">Total shuffles possible: 8.0658*10^67</p>
           {!isEmailEntered && (
             <div className="email-prompt">
               <h2>Enter your username to shuffle</h2>
