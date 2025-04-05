@@ -1,4 +1,12 @@
 /* styles.css */
+
+body {
+    background-image: url('/public/images/poker_felt.jpg');
+    background-size: cover; /* Ensures the image covers the whole page */
+    background-position: center; /* Centers the image */
+    background-attachment: fixed; /* Keeps the image fixed as you scroll */
+}
+
 .shuffle-button {
     background-color: #4CAF50;
     color: white;
