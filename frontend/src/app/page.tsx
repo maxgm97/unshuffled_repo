@@ -89,8 +89,8 @@ export default function ShufflePage() {
 
     return (
         <div style={{ textAlign: 'center', padding: '20px' }}>
-            <h1>Virtual Card Shuffle</h1>
-            <p>Total shuffles saved: {shuffleCount !== null ? shuffleCount : 'Loading...'}</p>
+            <h1 className="title">Virtual Card Shuffle</h1>
+            <p className="count">Total shuffles saved: {shuffleCount !== null ? shuffleCount : 'Loading...'}</p>
             <button onClick={handleShuffle} className="shuffle-button">
                 Shuffle Deck
             </button>

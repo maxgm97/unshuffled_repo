@@ -7,6 +7,16 @@ body {
     background-attachment: fixed; /* Keeps the image fixed as you scroll */
 }
 
+.title {
+    font-weight: bold;
+    font-size: 36px;
+}
+
+.count {
+    font-weight: bold;
+    font-size: 24px;
+}
+
 .shuffle-button {
     background-color: #4CAF50;
     color: white;
