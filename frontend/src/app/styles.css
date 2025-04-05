@@ -14,3 +14,18 @@
 .shuffle-button:hover {
     background-color: #45a049;
 }
+
+.card {
+    width: 70px;
+    height: auto;
+    background-size: cover;
+    margin: 5px;
+}
+
+/* Media query for larger screens (like computers) */
+@media (min-width: 768px) { /* For devices with screen width 768px and up (e.g., tablets, laptops, desktops) */
+    .card {
+        width: 150px; /* Make the card larger */
+        height: auto; /* Adjust height accordingly */
+    }
+}
