@@ -52,12 +52,6 @@ export default function ShufflePage() {
                     <div key={index}>{card}</div>
                 ))}
             </div>
-            <h2>Shuffle History</h2>
-            <ul>
-                {history.map((shuffle, index) => (
-                    <li key={index}>{shuffledDeck.join(', ')}</li>
-                ))}
-            </ul>
         </div>
     );
 }
