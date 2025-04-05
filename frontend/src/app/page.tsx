@@ -21,7 +21,7 @@ const shuffleDeck = (deck: string[]): string[] => {
 
 export default function ShufflePage() {
     //const [deck, setDeck] = useState<string[]>(generateDeck());
-    const [deck] = useState<string[]>(generateDeck());
+    //const [deck] = useState<string[]>(generateDeck());
     const [shuffledDeck, setShuffledDeck] = useState<string[]>([]);
     //const [history, setHistory] = useState<string[]>([]);
     const [shuffleCount, setShuffleCount] = useState<number | null>(null);
