@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import axios from 'axios';
 
 const suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades'];
@@ -24,23 +24,11 @@ export default function ShufflePage() {
     //const [deck, setDeck] = useState<string[]>(generateDeck());
     const [deck] = useState<string[]>(generateDeck());
     const [shuffledDeck, setShuffledDeck] = useState<string[]>([]);
-    const [history, setHistory] = useState<string[]>([]);
-
-    useEffect(() => {
-        axios.get('https://api.unshuffled.net/api/shuffles')
-            .then(response => setHistory(response.data))
-            .catch(error => console.error('Error fetching shuffle history:', error));
-    }, []);
     
     const handleShuffle = () => {
         const newShuffle = shuffleDeck(deck);
         //setDeck(newShuffle);  // This updates the deck state
         setShuffledDeck(newShuffle);
-        
-        
-        axios.post('https://api.unshuffled.net/api/shuffles', { shuffleData: newShuffle })
-            .then(response => setHistory(response.data.history))
-            .catch(error => console.error('Error saving shuffle:', error));
     };
 
     return (
