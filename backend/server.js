@@ -13,7 +13,7 @@ app.use(express.json());
 const PORT = process.env.PORT || 3000;
 
 const uri = process.env.MONGO_URI; // store connection string in .env
-const client = new MongoClient(uri)
+//const client = new MongoClient(uri)
 
 /*
 mongoose.connect(uri, {
@@ -37,37 +37,76 @@ client.connect()
   .catch(err => console.error('MongoDB connection error:', err));
 */
 
-
-MongoClient.connect(uri)
-  .then(client => {
+async function connectDB() {
+  try {
+    const client = new MongoClient(uri);
+    await client.connect()
     db = client.db('shufflesDB');
     shufflesCollection = db.collection('shuffles');
     console.log('Connected to MongoDB');
+  } catch (err) {
+    console.error('MongoDB connection error:', err);
+    process.exit(1);
+  // .then(client => {
+  }
+}
+
+// Middleware to ensure collection is ready
+function requireDB(req, res, next) {
+  if (!shufflesCollection) {
+    return res
+      .status(503)
+      .json({ error: 'Database not ready, please try again in a few seconds.' });
+  }
+  next();
+}
     
-    app.listen(PORT, () => {
-      console.log(`Server running on http://localhost:${PORT}`)
-    })
-  })
-  .catch(err => console.error('MongoDB connection error:', err));
+    
+//     app.listen(PORT, () => {
+//       console.log(`Server running on http://localhost:${PORT}`)
+//     })
+//   })
+//   .catch(err => console.error('MongoDB connection error:', err));
+// }
 
+app.post('/api/shuffles', requireDB, async (req, res) => {
+  try {
+    const { shuffle, email } = req.body;
 
-app.post('/api/shuffles', async (req, res) => {
-    try {
-        const { shuffle, email } = req.body;
-        if (!email) {
-            return res.status(400).json({ error: 'Username is required in case of duplicate shuffle'});
-        }
-        await shufflesCollection.insertOne({ 
-            shuffle, 
-            email,
-            createdAt: new Date() 
-        });
-        const allShuffles = await shufflesCollection.find().toArray();
-        res.json({ history: allShuffles.map(s => s.shuffle ) });
-    } catch (error) {
-        console.error(error);
-        res.status(500).send('Failed to save shuffle')
+    if (!Array.isArray(shuffle) || shuffle.length !== 52) {
+      return res.status(400).json({ error: 'Invalid shuffle array' });
     }
+    if (!email) {
+      return res.status(400).json({ error: 'Username is required' });
+    }
+
+    await shufflesCollection.insertOne({
+      shuffle,
+      email,
+      createdAt: new Date(),
+    });
+
+    res.json({ success: true });
+  } catch (err) {
+    console.error('Error saving shuffle:', err);
+    res.status(500).send('Failed to save shuffle');
+  }
+});
+    //     const { shuffle, email } = req.body;
+    //     if (!email) {
+    //         return res.status(400).json({ error: 'Username is required in case of duplicate shuffle'});
+    //     }
+    //     await shufflesCollection.insertOne({ 
+    //         shuffle, 
+    //         email,
+    //         createdAt: new Date() 
+    //     });
+    //     const allShuffles = await shufflesCollection.find().toArray();
+    //     res.json({ history: allShuffles.map(s => s.shuffle ) });
+    // } catch (error) {
+    //     console.error(error);
+    //     res.status(500).send('Failed to save shuffle')
+    // }
 
 /* // getting shuffle history?
 app.get('/api/shuffles', async (req, res) => {
@@ -83,12 +122,12 @@ app.get('/api/shuffles', async (req, res) => {
 */
 
 // getting shuffle count
-app.get('/api/shuffles/count', async (req, res) => {
+app.get('/api/shuffles/count', requireDB, async (req, res) => {
     try {
       const count = await shufflesCollection.countDocuments();
       res.json({ count });
-    } catch (error) {
-      console.error('Error counting documents:', error);
+    } catch (err) {
+      console.error('Error counting documents:', err);
       res.status(500).json({ error: 'Failed to count documents' });
     }
   });
@@ -100,8 +139,15 @@ app.get('/api/shuffles/count', async (req, res) => {
     saveShuffles(shuffles);
     res.json(shuffles);
 */
+// });
+
+// Connect to Mongo and then start server
+connectDB().then(() => {
+  app.listen(PORT, () => {
+    console.log(`Server running on http://localhost:${PORT}`);
+  });
 });
 
-app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
-});
+// app.listen(PORT, () => {
+//     console.log(`Server running on http://localhost:${PORT}`);
+// });
