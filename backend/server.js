@@ -49,13 +49,13 @@ MongoClient.connect(uri)
 
 app.post('/api/shuffles', async (req, res) => {
     try {
-        const { newShuffle, email } = req.body;
+        const { shuffle, email } = req.body;
         if (!email) {
             return res.status(400).json({ error: 'Username is required in case of duplicate shuffle'});
         }
         await shufflesCollection.insertOne({ 
-            shuffle: newShuffle, 
-            email: email,
+            shuffle, 
+            email,
             createdAt: new Date() 
         });
         const allShuffles = await shufflesCollection.find().toArray();
