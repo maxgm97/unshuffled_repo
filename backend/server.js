@@ -43,6 +43,10 @@ MongoClient.connect(uri)
     db = client.db('shufflesDB');
     shufflesCollection = db.collection('shuffles');
     console.log('Connected to MongoDB');
+    
+    app.listen(PORT, () => {
+      console.log(`Server running on http://localhost:${PORT}`)
+    })
   })
   .catch(err => console.error('MongoDB connection error:', err));
 
